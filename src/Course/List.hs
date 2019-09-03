@@ -265,7 +265,8 @@ lengthGT4 xs = length (take 5 xs) > 4
 --
 -- prop> \x -> let types = x :: Int in reverse (x :. Nil) == x :. Nil
 reverse :: List a -> List a
-reverse (xs:x) = x :. reverse xs
+reverse (x:.Nil) = x :. Nil
+reverse xs  = foldLeft (\acc x -> x :. acc) Nil xs
 
 -- | Produce an infinite `List` that seeds with the given value at its head,
 -- then runs the given function for subsequent elements
